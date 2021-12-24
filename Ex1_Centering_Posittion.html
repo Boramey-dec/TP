@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centering with position</title>
+
+   <style>
+            .wrapper{
+            width: 400px;
+            height: 400px;
+            background-color: lightgrey;
+            border-radius: 2px;
+            position: relative;
+            /*align-items: center;*/
+
+        }
+
+        .flying-box{
+            width: 120px;
+            height: 30px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            background-color: rgb(207, 89, 89);
+            color: white;
+            border-radius: 3px;
+            padding: 20px;
+        }
+   </style>
+
+</head>
+<body>
+    <div class="wrapper">
+        <div class="flying-box">
+            I'm in Center 😂
+        </div>
+
+    </div>
+</body>
+</html>

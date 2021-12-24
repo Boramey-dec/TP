@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation & Variable</title>
+    <style>
+        .wrapper{
+            width: 400px;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            background-color: lightgrey;
+            border-radius: 2px;
+           
+       
+        }
+        .drop{ 
+            opacity: 0;
+            padding: 10px;
+            position: relative;
+            animation-name: emoji;
+            animation-duration: 4s;
+            animation-delay: var(--order);
+            animation-fill-mode: forwards;
+            animation-timing-function: linear; 
+
+        }
+        
+
+        @keyframes emoji{
+            from {
+                opacity: 1;
+                margin-top: -100px;
+            }
+            to {
+                opacity: 1;
+                margin-top: 50%;
+            }
+        } 
+
+       
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <span class="drop" style="--order: 0s">🥳</span>
+        <span class="drop" style="--order: 0.5s">😝</span>
+        <span class="drop" style="--order: 1s">😍</span>
+    </div>
+</body>
+</html>
