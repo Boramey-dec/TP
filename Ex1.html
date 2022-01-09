@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draw an image To Canvas</title>
+    <style>
+        #canvas {
+            border: 15px solid rgb(138, 138, 138);
+            border-top: 15px solid rgb(138, 138, 138);
+            /* background-color: rgb(138, 138, 138); */
+        }
+        
+        .upload-img {
+            background-color: rgb(138, 138, 138);
+            width: 530px;
+        }
+        
+        .upload-img>span {
+            color: #fafafa;
+        }
+        
+        .upload-img>div>input {
+            color: #fafafa;
+            margin-bottom: 5px;
+        }
+    </style>   
+</head>
+
+<body>
+    <center>
+        <canvas width="500" height="500" id="canvas"></canvas>
+        <div class="upload-img">
+            <span>Canvas 👻 : Insert your image here !</span>
+            <div>
+                <input type="file" id="fileinput" accept="image/*" />​
+            </div>
+        </div>
+    </center>
+    <script>
+        let fileInput = document.getElementById("fileinput").addEventListener("change", function(event) {
+            if (event.target.files) {
+                let file = event.target.files[0]; //get items image from input
+                console.log(file);
+
+                var reader = new FileReader();
+                reader.readAsDataURL(file); //read image from input 
+                reader.onloadend = function(event) {
+                    var image = new Image();
+                    image.src = event.target.result; //src image to display from reader file
+
+                    image.onload = function() {
+                        var canvas = document.getElementById("canvas");
+                        canvas.width = 500;
+                        canvas.height = 500;
+                        var ctx = canvas.getContext('2d');
+                        console.log(image.width);
+                        console.log(image.height);
+
+                        ctx.drawImage(image, 0, 0,image.width,image.height,0,0,500,500);
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
