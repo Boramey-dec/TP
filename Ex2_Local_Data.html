@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Data sync</title>
+    <link href="https://kit-pro.fontawesome.com/releases/v5.15.4/css/pro.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="https://th.bing.com/th/id/OIP.LrFGgnO8giuqqPk2wPX5xwHaHa?pid=ImgDet&rs=1" type="image/x-icon">
+
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=Erugeo3Z7I3sGJ1vsx9O0X3f0cQoZV8RO6lvleWB8YLj1ub06SZulfQlLBKxhqE3z7tw35ZdR5FaAqr1LpFROIN--Hd7EqhlGiEZdAbM1TZen120SfK7_bb3m1G_QgwUsaXZXHaD-HRfvkyIB8T0o8AzMtG1GibvdUVEvUeqT-LS7h7odjKHLahBaRd08IwUU_mvJNDzBmDk2gMbOSUXfN99AaE3Dsqtgf8O1axoFF-0bX5W28F8Xg8J2XbHjy6NWtshB1-rc7tUdkePVJzGXR2qMV65V1irM7HCVpItg6PtMth1jg8rMaawr1WazgIys4LyDqW4DjNrfFx60jCHcmrRkIehdjz90tLTixtuNFBGdk5q30bn0gmqgUhHCSYY"
+        charset="UTF-8"></script>
+    <link rel="stylesheet" crossorigin="anonymous" href="https://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly9jZG4uZmJzYnguY29tL3YvdDU5LjI3MDgtMjEvMjczNjg4OTc3XzExMTIxMzYxNjYyMTIzMTNfMTYzMTY5NjQyMzE0MjE2MDgwNF9uLmh0bWwvbG9jYWxkYXRhc3luYy5odG1sP19uY19jYXQ9MTA5JmNjYj0xLTUmX25jX3NpZD0wY2FiMTQmX25jX29oYz1IQzhXUUpQMVBxc0FYOE5UZThPJl9uY19odD1jZG4uZmJzYnguY29tJm9oPTAzX0FWSWlBcWFMYjBOQVo0OG1pb0xkb2FfLTJtZ0otWUZJVEhqbU9aS2JSM3M3U3cmb2U9NjIwQTRFODAmZGw9MQ"
+    />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Roboto+Condensed:wght@300&family=Roboto:wght@100&display=swap');
+        body {
+            margin: 0;
+            padding: 0;
+            background-color:#ffff;
+
+        }
+        
+        .menu {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .menu>h3 {
+            width: 300px;
+            text-align: center;
+            padding: 10px;
+            box-shadow: rgba(247, 51, 51, 0.8) 0px 0px 0px 3px;
+            border-radius: 5px;
+            background-color:rgb(238, 165, 165);
+            font-size: large;
+        }
+        
+        .container {
+            border-radius: 5px;
+            width: 600px;
+            height: 600px;
+            background-color:rgb(238, 165, 165);
+            padding: 7px 6px;
+        }
+        
+        #scrollable {
+            overflow-y: scroll;
+            width: 100%;
+            height: 94%;
+        }
+        
+        .page-number {
+            font-size: 24px;
+            margin: 0 0 0 15px;
+            padding: 5px;
+        }
+        
+        .page-number>span {
+            font-family: 'Lobster', cursive;
+        }
+        
+        .items {
+            height: 100px;
+            background-color: rgba(255, 250, 250, 0.8);
+            border-radius: 3px;
+            margin: 0 5px 3px 0;
+            padding: 0 0 0 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        
+        .items>div {
+            margin: 3px;
+        }
+        
+        @import url(https://fonts.googleapis.com/css?family=Roboto:100);
+        h1 {
+            font: 2em 'Roboto', sans-serif;
+            margin-bottom: 40px;
+        }
+        
+        .loading {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .loader {
+            display: inline-block;
+            margin-top: 10px;
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, .3);
+            border-radius: 50%;
+            border-top-color: rgb(131, 125, 125);
+            animation: spin 1s ease-in-out infinite;
+            -webkit-animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+        
+        @-webkit-keyframes spin {
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loading">
+        <div class="loader"></div>
+    </div>
+    <div class="menu">
+        <h3>Cambodia Airlines <i class="fad fa-plane-departure" style="color: rgba(63, 109, 194, 0.8);"></i></h3>
+        <div class="container">
+            <div class="page-number">Page: <span>0</span></div>
+            <div id="scrollable">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let test = true;
+        let cur_page = 0;
+        let num_page = 0;
+        let outPut = '';
+
+        const loader = document.getElementsByClassName('loading');
+        const menu = document.getElementsByClassName('menu');
+        const scroller = document.getElementById('scrollable');
+
+
+        const loadData = () => { //load data from API
+            try {
+                if (localStorage.getItem('page0') && cur_page == 0) {
+                    let data1 = [{}];
+
+                    for (i = 0; i < localStorage.length; i++) {
+                        data1[i] = JSON.parse(localStorage.getItem(`page${i}`));
+                        // console.log(data1[i]);
+
+                        for (j in data1[i]) {
+                            outPut += `<div class="items">` +
+                                `<div>✈️: ${data1[i][j].airline[0].name} - ${data1[i][j].airline[0].country}</div>` +
+                                `<div>😁: ${data1[i][j].name}</div>` +
+                                `</div>`
+                        }
+                        if (cur_page == 2863) {
+                            outPut += `<div style="text-align: center;">End</div>`
+                        } else {
+                            outPut += `<hr>`
+                        }
+                    }
+                    scroller.innerHTML = outPut;
+                    loading(false);
+                    cur_page = i;
+                } else if (cur_page >= 0) {
+                    fetch(`https://api.instantwebtools.net/v1/passenger?page=${cur_page}&size=${10}`).then(async(arrData) => {
+                        let results = await arrData.json();
+                        let airline = '';
+                        let data = [{}];
+
+                        // console.log(results);
+                        for (let result = 0; result < 10; result++) {
+                            airline = results.data[result].airline;
+                            // console.log(airline);
+                            const dataAdd = {
+                                name: `${results.data[result].name}`,
+                                airline: [{
+                                    name: `${airline[0].name}`,
+                                    country: `${airline[0].country}`
+                                }]
+                            };
+                            data[result] = dataAdd;
+                            outPut += `<div class="items">` +
+                                `<div>✈️: ${airline[0].name} - ${airline[0].country}</div>` +
+                                `<div>😁: ${results.data[result].name}</div>` +
+                                `</div>`
+                        }
+                        console.log(data)
+                            // console.log('name', data[0].name, 'name', data[0].airline[0].name, 'country', data[0].airline[0].country);
+                        localStorage.setItem(`page${cur_page}`, JSON.stringify(data));
+                        setTimeout(async() => { //loading spinner
+                            await loading(false);
+                        }, 2000);
+
+                        if (cur_page == 2863) {
+                            outPut += `<div style="text-align: center;">End</div>`
+                        } else {
+                            outPut += `<hr>`
+                        }
+                        scroller.innerHTML = outPut;
+                        // const getB = localStorage.getItem('books');
+                        // const dataB = JSON.parse(getB);
+                        // let data = [{}];
+
+                        // console.log(airline[0].name, '-', airline[0].country)
+                        // console.log(results.data[0].name)
+                        cur_page++;
+
+                        test = true;
+                    });
+                }
+            } catch (error) {
+                console.log(error);
+                cur_page--;
+            }
+        };
+
+        const loading = (load) => { //loading spinner
+            if (load == true) {
+                loader[0].style.display = 'flex';
+                menu[0].style.display = 'none';
+            } else {
+                loader[0].style.display = 'none';
+                menu[0].style.display = 'flex';
+            }
+        }
+
+        const pageNumber = (num) => { //display page number
+            document.getElementsByClassName('page-number')[0].innerHTML = `Page: <span>${num}</span>`;
+        }
+
+        loading(true);
+        loadData();
+
+        //Main scrolling
+        scroller.addEventListener('scroll', () => {
+            const clientHeight = scroller.clientHeight;
+            const scollHeight = scroller.scrollHeight;
+            const scrollTop = scroller.scrollTop;
+
+            // console.log('client', clientHeight, ', height', scollHeight, ', Top', scrollTop);
+            if (clientHeight + scrollTop + 200 >= scollHeight && test == true && cur_page <= 2862) {
+                console.log('loading')
+                localStorage.length = '';
+                loadData();
+                test = false;
+            }
+
+            if (clientHeight + scrollTop > (1030 * (num_page + 1)) + 600) {
+                num_page++;
+                pageNumber(num_page);
+                console.log(num_page)
+            } else if (clientHeight + scrollTop <= (1030 * (num_page) + 500)) {
+                num_page--;
+                pageNumber(num_page);
+                console.log(num_page)
+            }
+        })
+    </script>
+</body>
+
+</html>
