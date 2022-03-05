@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./ex2.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Khmer Date Time</title>
+</head>
+
+<body>
+
+    <div>
+        <main class="container">
+            <section class="col-sm-12 ">
+                <form >
+                    <h2 class="header">Khmer Date Time</h2>
+                    <br><br>
+
+                    <label for="appt">Select time:</label>
+                    <input type="time" id="dataInputdate1" name="appt">
+                    <br><br><br>
+
+                    <label for="appt">Select date:</label>
+                    <input type="date" id="dataInputdate2" name="appt">
+                    <br><br><br>
+                  
+                     
+                </form>
+                <button onclick="onShow()" id="btnShow">Show Status</button>
+            </section>
+                <footer>
+                    <center>
+                        <label id="txt1"></label>
+                        <label id="txt"></label>
+                    </center>
+
+                </footer>
+        </main>
+
+        
+        
+        <div id="top ">
+
+            <!--<input type="text " id="dataInputdate6" placeholder="Input format date" value="2022-02-02T17:28:00.839z">-->
+            <label id="text"></label>
+
+            <!--<button onclick="onDelete() " id="btnDelete ">Delete</button>-->
+        </div>
+
+        <script src="http://localhost:3000/script">
+        </script>
+
+        <script type="text/javascript">
+            $(function() {
+                $('#datetimepicker2').datetimepicker();
+            });
+        </script>
+    </div>
+</body>
+
+</html>
+</body>
+
+</html>
